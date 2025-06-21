@@ -1,0 +1,11 @@
+# Environment
+.env
+env/
+venv/
+__pycache__/
+
+# IDE / Editor specific
+.vscode/
+.idea/
+*.swp
+*.swo 
