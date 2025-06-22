@@ -116,35 +116,38 @@ export default function Marketplace() {
                 {userNFTs.map((nft) => (
                   <div 
                     key={nft._id} 
-                    className={`border rounded-lg p-3 cursor-pointer m-4 transition-colors ${
+                    className={`border rounded-lg p-3 cursor-pointer transition-colors flex items-center space-x-4 ${
                       selectedNFT?._id === nft._id ? 'border-primary bg-primary/10' : ''
                     }`}
                     onClick={() => setSelectedNFT(nft)}
                   >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-semibold">{nft.name}</h4>
-                        <p className="text-sm text-gray-600">{nft.description}</p>
-                        <span className={`badge badge-sm ${
-                          nft.rarity === 'Legendary' ? 'badge-error' :
-                          nft.rarity === 'Epic' ? 'badge-warning' :
-                          nft.rarity === 'Rare' ? 'badge-info' :
-                          'badge-success'
-                        }`}>
-                          {nft.rarity}
-                        </span>
-                      </div>
-                      <div className="text-right">
-                        <button 
-                          className={`btn btn-xs ${nft.listed ? 'btn-success' : 'btn-outline'} text-white`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleToggleListing(nft._id);
-                          }}
-                          disabled={isLoading}
-                        >
-                          {nft.listed ? 'Listed' : 'List'}
-                        </button>
+                    <img src={nft.image_url} alt={nft.name} className="w-16 h-16 rounded-md object-cover" />
+                    <div className="flex-grow">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-semibold">{nft.name}</h4>
+                          <p className="text-sm text-gray-600">{nft.description}</p>
+                          <span className={`badge badge-sm ${
+                            nft.rarity === 'Legendary' ? 'badge-error' :
+                            nft.rarity === 'Epic' ? 'badge-warning' :
+                            nft.rarity === 'Rare' ? 'badge-info' :
+                            'badge-success'
+                          }`}>
+                            {nft.rarity}
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <button 
+                            className={`btn btn-xs ${nft.listed ? 'btn-success' : 'btn-outline'}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleToggleListing(nft._id);
+                            }}
+                            disabled={isLoading}
+                          >
+                            {nft.listed ? 'Listed' : 'List'}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -168,30 +171,33 @@ export default function Marketplace() {
             ) : (
               <div className="space-y-3">
                 {marketplaceNFTs.map((nft) => (
-                  <div key={nft._id} className="border rounded-lg p-3 m-4">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-semibold">{nft.name}</h4>
-                        <p className="text-sm text-gray-600">{nft.description}</p>
-                        <span className={`badge badge-sm ${
-                          nft.rarity === 'Legendary' ? 'badge-error' :
-                          nft.rarity === 'Epic' ? 'badge-warning' :
-                          nft.rarity === 'Rare' ? 'badge-info' :
-                          'badge-success'
-                        }`}>
-                          {nft.rarity}
-                        </span>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Owner: {nft.user_id.slice(-8)}...
-                        </p>
+                  <div key={nft._id} className="border rounded-lg p-3 flex items-center space-x-4">
+                    <img src={nft.image_url} alt={nft.name} className="w-16 h-16 rounded-md object-cover" />
+                    <div className="flex-grow">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-semibold">{nft.name}</h4>
+                          <p className="text-sm text-gray-600">{nft.description}</p>
+                          <span className={`badge badge-sm ${
+                            nft.rarity === 'Legendary' ? 'badge-error' :
+                            nft.rarity === 'Epic' ? 'badge-warning' :
+                            nft.rarity === 'Rare' ? 'badge-info' :
+                            'badge-success'
+                          }`}>
+                            {nft.rarity}
+                          </span>
+                          <p className="text-xs text-gray-500 mt-1">
+                            Owner: {nft.owner.wallet_address.slice(0, 6)}...{nft.owner.wallet_address.slice(-4)}
+                          </p>
+                        </div>
+                        <button 
+                          className="btn btn-primary btn-sm"
+                          onClick={() => handleTrade(nft._id)}
+                          disabled={!selectedNFT || isLoading}
+                        >
+                          Trade
+                        </button>
                       </div>
-                      <button 
-                        className={`btn btn-primary btn-xs text-white ${!selectedNFT || isLoading ? 'btn-disabled' : ''}`}
-                        onClick={() => handleTrade(nft._id)}
-                        disabled={!selectedNFT || isLoading}
-                      >
-                        Trade
-                      </button>
                     </div>
                   </div>
                 ))}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUserNFTs } from "../services/api.js";
+import { getUserNFTs, toggleNFTListing } from "../services/api.js";
 
 export default function Profile({ onLogout }) {
   const [nfts, setNfts] = useState([]);
@@ -25,6 +25,22 @@ export default function Profile({ onLogout }) {
       console.error("Error loading NFTs:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleToggleListing = async (nftId) => {
+    try {
+      // Optimistically update the UI
+      setNfts(prevNfts => 
+        prevNfts.map(nft => 
+          nft._id === nftId ? { ...nft, listed: !nft.listed } : nft
+        )
+      );
+      await toggleNFTListing(nftId, user._id);
+    } catch (error) {
+      console.error("Failed to toggle listing", error);
+      // Revert the UI change on error
+      loadNFTs(); 
     }
   };
 
@@ -95,22 +111,33 @@ export default function Profile({ onLogout }) {
             ) : (
               <div className="space-y-3 text-black m-4">
                 {nfts.map((nft) => (
-                  <div key={nft._id} className="border rounded-lg p-3">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-semibold">{nft.name}</h4>
-                        <p className="text-sm text-gray-600">{nft.description}</p>
-                        <span className={`badge badge-sm ${
-                          nft.rarity === 'Legendary' ? 'badge-error' :
-                          nft.rarity === 'Epic' ? 'badge-warning' :
-                          nft.rarity === 'Rare' ? 'badge-info' :
-                          'badge-success'
-                        }`}>
-                          {nft.rarity}
-                        </span>
-                      </div>
-                      <div className="text-right text-xs text-gray-500">
-                        <p>Minted: {new Date(nft.minted_at).toLocaleDateString()}</p>
+                  <div key={nft._id} className="border rounded-lg p-3 flex items-center space-x-4">
+                    <img src={nft.image_url} alt={nft.name} className="w-16 h-16 rounded-md object-cover" />
+                    <div className="flex-grow">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-semibold">{nft.name}</h4>
+                          <p className="text-sm text-gray-600">{nft.description}</p>
+                          <span className={`badge badge-sm ${
+                            nft.rarity === 'Legendary' ? 'badge-error' :
+                            nft.rarity === 'Epic' ? 'badge-warning' :
+                            nft.rarity === 'Rare' ? 'badge-info' :
+                            'badge-success'
+                          }`}>
+                            {nft.rarity}
+                          </span>
+                        </div>
+                        <div className="text-right text-xs text-gray-500">
+                          <p>Minted: {new Date(nft.created_at).toLocaleDateString()}</p>
+                        </div>
+                        <div className="text-right text-xs">
+                          <button 
+                            className={`btn btn-xs ${nft.listed ? 'btn-warning' : 'btn-success'}`}
+                            onClick={() => handleToggleListing(nft._id)}
+                          >
+                            {nft.listed ? 'Unlist' : 'List on Market'}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -12,17 +12,46 @@ def get_listed_nfts(user_id):
     """
     db = get_db()
 
-    # Find all NFTs that are listed and not owned by the current user
-    nfts_cursor = db.nfts.find({
-        "listed": True,
-        "user_id": {"$ne": ObjectId(user_id)}
-    })
+    pipeline = [
+        {
+            "$match": {
+                "listed": True,
+                "user_id": {"$ne": ObjectId(user_id)}
+            }
+        },
+        {
+            "$lookup": {
+                "from": "users",
+                "localField": "user_id",
+                "foreignField": "_id",
+                "as": "owner"
+            }
+        },
+        {
+            "$unwind": "$owner"
+        },
+        {
+            "$project": {
+                "name": 1,
+                "description": 1,
+                "rarity": 1,
+                "image_url": 1,
+                "listed": 1,
+                "created_at": 1,
+                "goal_id": 1,
+                "owner.wallet_address": 1,
+                "owner._id": 1
+            }
+        }
+    ]
+
+    nfts_cursor = db.nfts.aggregate(pipeline)
     
     nfts_list = []
     for nft in nfts_cursor:
         nft['_id'] = str(nft['_id'])
-        nft['user_id'] = str(nft['user_id'])
         nft['goal_id'] = str(nft['goal_id'])
+        nft['owner']['_id'] = str(nft['owner']['_id'])
         nfts_list.append(nft)
         
     return jsonify(nfts_list), 200

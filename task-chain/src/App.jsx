@@ -18,6 +18,8 @@ function App() {
   }, []);
 
   const handleLogin = (userData) => {
+    console.log('--- APP LOGIN HANDLER ---');
+    console.log('User data received by App.jsx:', userData);
     setUser(userData);
   };
 
