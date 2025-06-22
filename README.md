@@ -42,7 +42,7 @@ SpurHacks: Special thanks to SpurHacks for providing the platform and support fo
 For inquiries or feedback, reach out to us:  
 - Sujoy Das – [LinkedIn](https://www.linkedin.com/in/sujoydas1/)
 - Aryan Aggarwal – [LinkedIn](https://www.linkedin.com/in/aryan-aggarwal-/)
-- 
+- Aryan Dhillon - [LinkedIn](https://www.linkedin.com/in/aryan-dhillon-ab0822370/)
 
 Check out our GitHub repository for more information!
 
