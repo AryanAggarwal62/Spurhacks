@@ -80,8 +80,8 @@ export default function Goals() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Goals</h2>
-      
+      <h2 className="text-6xl font-bold text-black">Goals</h2>
+
       {error && (
         <div className="alert alert-error mb-4">
           <span>{error}</span>
@@ -95,13 +95,13 @@ export default function Goals() {
       )}
 
       <form className="card bg-base-100 shadow-md p-6 mb-6" onSubmit={handleAddGoal}>
-        <h3 className="text-lg font-semibold mb-4">Create New Goal</h3>
-        <div className="form-control mb-4">
+        <h3 className="text-xl font-semibold mb-4 text-black">Create New Goal</h3>
+        <div className="form-control mb-4 text-black ">
           <label className="label">
             <span className="label-text">Goal Title</span>
           </label>
           <input
-            className="input input-bordered"
+            className="input input-bordered mx-4"
             type="text"
             placeholder="e.g., Run a 5K"
             value={newGoalTitle}
@@ -109,12 +109,12 @@ export default function Goals() {
             disabled={isLoading}
           />
         </div>
-        <div className="form-control mb-4">
+        <div className="form-control mb-4 text-black">
           <label className="label">
             <span className="label-text">Description</span>
           </label>
           <textarea
-            className="textarea textarea-bordered"
+            className="textarea textarea-bordered mx-4"
             placeholder="Describe your goal..."
             value={newGoalDescription}
             onChange={(e) => setNewGoalDescription(e.target.value)}
@@ -131,7 +131,7 @@ export default function Goals() {
         </button>
       </form>
 
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-black">
         {goals.map(goal => (
           <div key={goal._id} className={`card bg-base-100 shadow-md p-4 ${goal.status === 'completed' ? 'opacity-75' : ''}`}>
             <div className="card-body p-0">
@@ -145,7 +145,7 @@ export default function Goals() {
                 
                 {goal.status === 'active' && (
                   <button 
-                    className="btn btn-sm btn-primary"
+                    className="btn btn-sm btn-primary text-white"
                     onClick={() => handleCompleteGoal(goal._id)}
                     disabled={isLoading}
                   >

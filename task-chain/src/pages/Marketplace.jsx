@@ -85,7 +85,7 @@ export default function Marketplace() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Marketplace</h2>
+      <h2 className="text-6xl font-bold mb-4 text-black">Marketplace</h2>
       
       {error && (
         <div className="alert alert-error mb-4">
@@ -99,11 +99,11 @@ export default function Marketplace() {
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 text-black">
         {/* Your NFTs */}
-        <div className="card bg-base-100 shadow-md">
+        <div className="card bg-base-100 shadow-md rounded-lg">
           <div className="card-body">
-            <h3 className="card-title">Your NFTs</h3>
+            <h3 className="card-title m-4 font-bold">Your NFTs</h3>
             {isLoading ? (
               <div className="text-center">
                 <span className="loading loading-spinner loading-md"></span>
@@ -158,9 +158,9 @@ export default function Marketplace() {
         </div>
 
         {/* Available for Trade */}
-        <div className="card bg-base-100 shadow-md">
+        <div className="card bg-base-100 shadow-md rounded-lg">
           <div className="card-body">
-            <h3 className="card-title">Available for Trade</h3>
+            <h3 className="card-title m-4 font-bold">Available for Trade</h3>
             {isLoading ? (
               <div className="text-center">
                 <span className="loading loading-spinner loading-md"></span>

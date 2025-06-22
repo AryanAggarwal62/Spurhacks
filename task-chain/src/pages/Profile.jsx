@@ -47,6 +47,8 @@ export default function Profile({ onLogout }) {
   const handleLogout = () => {
     localStorage.removeItem('user');
     onLogout();
+    // Redirect to login page
+    window.location.href = '/login';
   };
 
   if (!user._id) {
@@ -60,7 +62,7 @@ export default function Profile({ onLogout }) {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Profile</h2>
+        <h2 className="text-6xl text-black font-bold">Profile</h2>
         <button className="btn btn-outline btn-error" onClick={handleLogout}>
           Logout
         </button>
@@ -68,36 +70,37 @@ export default function Profile({ onLogout }) {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* User Information */}
-        <div className="card bg-base-100 shadow-md">
-          <div className="card-body">
-            <h3 className="card-title">User Information</h3>
-            <div className="space-y-2">
-              <div>
-                <span className="font-semibold">Wallet Address:</span>
-                <p className="text-sm text-gray-600 break-all">{user.wallet_address}</p>
+        <div className="card shadow-lg rounded-lg">
+          <div className="card-body m-4">
+            <h3 className="card-title mx-4 text-2xl font-bold text-black">User Information</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mx-2 my-4">
+              {/* Wallet Address Tile */}
+              <div className="bg-blue-400 rounded-lg shadow flex flex-col items-center justify-center min-h-[110px] min-w-0 h-full w-full p-3">
+                <span className="font-bold text-2xl text-white mb-1">Wallet</span>
+                <p className="text-xs text-white break-all text-center font-mono">{user.wallet_address}</p>
               </div>
-              <div>
-                <span className="font-semibold">Member Since:</span>
-                <p className="text-sm text-gray-600">
-                  {new Date(user.created_at).toLocaleDateString()}
-                </p>
+              {/* Member Since Tile */}
+              <div className="bg-green-400 rounded-lg shadow flex flex-col items-center justify-center min-h-[110px] min-w-0 h-full w-full p-3">
+                <span className="font-bold text-2xl text-white mb-1">Member</span>
+                <p className="text-base text-white font-semibold">{new Date(user.created_at).toLocaleDateString()}</p>
               </div>
-              <div>
-                <span className="font-semibold">Total NFTs:</span>
-                <p className="text-sm text-gray-600">{nfts.length}</p>
+              {/* Total NFTs Tile */}
+              <div className="bg-purple-500 rounded-lg shadow flex flex-col items-center justify-center min-h-[110px] min-w-0 h-full w-full p-3">
+                <span className="font-bold text-2xl text-white mb-1">NFTs</span>
+                <p className="text-3xl text-white font-extrabold">{nfts.length}</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* NFT Collection */}
-        <div className="card bg-base-100 shadow-md">
-          <div className="card-body">
-            <h3 className="card-title">NFT Collection</h3>
+        <div className="card shadow-lg rounded-lg">
+          <div className="card-body my-4">
+            <h3 className="card-title mx-4 text-2xl font-bold text-black">NFT Collection</h3>
             {isLoading ? (
               <div className="text-center">
-                <span className="loading loading-spinner loading-md"></span>
-                <p>Loading NFTs...</p>
+                <span className="loading loading-spinner loading-md text-neutral"></span>
+                <span className="font-bold text-2xl text-white mb-1">Loading NFTs...</span>
               </div>
             ) : error ? (
               <div className="alert alert-error">
@@ -106,7 +109,7 @@ export default function Profile({ onLogout }) {
             ) : nfts.length === 0 ? (
               <p className="text-gray-500">No NFTs yet. Complete some goals to earn rewards!</p>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 text-black m-4">
                 {nfts.map((nft) => (
                   <div key={nft._id} className="border rounded-lg p-3 flex items-center space-x-4">
                     <img src={nft.image_url} alt={nft.name} className="w-16 h-16 rounded-md object-cover" />
