@@ -20,8 +20,10 @@ Task Chain empowers users to stay motivated by turning goal achievement into a r
 <img width="1710" alt="Screenshot 2025-06-22 at 10 26 31 AM" src="https://github.com/user-attachments/assets/f0c66f26-dea6-4ab2-b27b-5af2e9868cbb" />
 <img width="1710" alt="Screenshot 2025-06-22 at 10 26 44 AM" src="https://github.com/user-attachments/assets/b800eeb5-c6ec-4f67-9c6c-31309bc4f81f" />
 <img width="1710" alt="Screenshot 2025-06-22 at 10 26 55 AM" src="https://github.com/user-attachments/assets/232dda4f-21ee-4da5-9fd5-4ea913441942" />
-<img width="1710" alt="Screenshot 2025-06-22 at 10 27 00 AM" src="https://github.com/user-attachments/assets/e03f9c59-acca-49e7-bc12-83eaf2e27af1" />
-<img width="1710" alt="Screenshot 2025-06-22 at 10 27 05 AM" src="https://github.com/user-attachments/assets/a33bba54-5272-472e-bf79-0ddf150b8b18" />
+<img width="1710" alt="Screenshot 2025-06-22 at 10 37 28 AM" src="https://github.com/user-attachments/assets/359cf57c-42d5-4e75-a098-0691e41a8066" />
+<img width="1710" alt="Screenshot 2025-06-22 at 10 37 36 AM" src="https://github.com/user-attachments/assets/c7987952-270b-4a0f-8ed3-a550971689f9" />
+
+
 
 
 **Built With**
