@@ -85,7 +85,7 @@ export default function Marketplace() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Marketplace</h2>
+      <h2 className="text-6xl font-bold mb-4 text-black">Marketplace</h2>
       
       {error && (
         <div className="alert alert-error mb-4">
@@ -99,11 +99,11 @@ export default function Marketplace() {
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 text-black">
         {/* Your NFTs */}
-        <div className="card bg-base-100 shadow-md">
+        <div className="card bg-base-100 shadow-md rounded-lg">
           <div className="card-body">
-            <h3 className="card-title">Your NFTs</h3>
+            <h3 className="card-title m-4 font-bold">Your NFTs</h3>
             {isLoading ? (
               <div className="text-center">
                 <span className="loading loading-spinner loading-md"></span>
@@ -116,7 +116,7 @@ export default function Marketplace() {
                 {userNFTs.map((nft) => (
                   <div 
                     key={nft._id} 
-                    className={`border rounded-lg p-3 cursor-pointer transition-colors ${
+                    className={`border rounded-lg p-3 cursor-pointer m-4 transition-colors ${
                       selectedNFT?._id === nft._id ? 'border-primary bg-primary/10' : ''
                     }`}
                     onClick={() => setSelectedNFT(nft)}
@@ -136,7 +136,7 @@ export default function Marketplace() {
                       </div>
                       <div className="text-right">
                         <button 
-                          className={`btn btn-xs ${nft.listed ? 'btn-success' : 'btn-outline'}`}
+                          className={`btn btn-xs ${nft.listed ? 'btn-success' : 'btn-outline'} text-white`}
                           onClick={(e) => {
                             e.stopPropagation();
                             handleToggleListing(nft._id);
@@ -155,9 +155,9 @@ export default function Marketplace() {
         </div>
 
         {/* Available for Trade */}
-        <div className="card bg-base-100 shadow-md">
+        <div className="card bg-base-100 shadow-md rounded-lg">
           <div className="card-body">
-            <h3 className="card-title">Available for Trade</h3>
+            <h3 className="card-title m-4 font-bold">Available for Trade</h3>
             {isLoading ? (
               <div className="text-center">
                 <span className="loading loading-spinner loading-md"></span>
@@ -168,7 +168,7 @@ export default function Marketplace() {
             ) : (
               <div className="space-y-3">
                 {marketplaceNFTs.map((nft) => (
-                  <div key={nft._id} className="border rounded-lg p-3">
+                  <div key={nft._id} className="border rounded-lg p-3 m-4">
                     <div className="flex justify-between items-start">
                       <div>
                         <h4 className="font-semibold">{nft.name}</h4>
@@ -186,7 +186,7 @@ export default function Marketplace() {
                         </p>
                       </div>
                       <button 
-                        className="btn btn-primary btn-sm"
+                        className={`btn btn-primary btn-xs text-white ${!selectedNFT || isLoading ? 'btn-disabled' : ''}`}
                         onClick={() => handleTrade(nft._id)}
                         disabled={!selectedNFT || isLoading}
                       >

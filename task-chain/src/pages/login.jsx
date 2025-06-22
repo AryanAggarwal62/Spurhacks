@@ -38,9 +38,9 @@ export default function Login({ onLogin }) {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-white to-pink-200 ">
-      <div className="card max-w-sm w-auto bg-white shadow-2xl text-black">
+      <div className="card max-w-sm w-auto text-black">
         <form className="card-body" onSubmit={handleLogin}>
-          <h2 className="card-title text-3xl font-bold mb-4 justify-center text-primary">GoalForge</h2>
+          <h2 className="card-title text-3xl font-bold mb-4 text-center text-primary">Task Chain</h2>
           <p className="text-center text-gray-600 mb-6">Connect your wallet to start your journey</p>
           
           {error && (
@@ -50,7 +50,7 @@ export default function Login({ onLogin }) {
           )}
           
           <div className="form-control mb-4">
-            <label className="label">
+            <label className="label" style={{ marginRight: '0.75rem' }}>
               <span className="label-text">Wallet Address</span>
             </label>
             <input
