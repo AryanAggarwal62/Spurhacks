@@ -132,7 +132,7 @@ export default function Profile({ onLogout }) {
                         </div>
                         <div className="text-right text-xs">
                           <button 
-                            className={`btn btn-xs ${nft.listed ? 'btn-warning' : 'btn-success'}`}
+                            className={`btn btn-xs ${nft.listed ? 'btn-warning text-white' : 'btn-success text-white'}`}
                             onClick={() => handleToggleListing(nft._id)}
                           >
                             {nft.listed ? 'Unlist' : 'List on Market'}

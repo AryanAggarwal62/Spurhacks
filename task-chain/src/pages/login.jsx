@@ -87,7 +87,7 @@ export default function Login({ onLogin }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-white to-pink-200 ">
       <div className="card max-w-sm w-auto text-black">
-        <form className="card-body" onSubmit={handleLogin}>
+        <div className="card-body">
           <h2 className="card-title text-3xl font-bold mb-4 text-center text-primary">Task Chain</h2>
           <p className="text-center text-gray-600 mb-6">Connect your wallet to start your journey</p>
           {error && (
@@ -103,21 +103,22 @@ export default function Login({ onLogin }) {
           >
             {isLoading ? 'Connecting...' : 'Connect with MetaMask'}
           </button>
-          
           {DEMO_MODE && (
             <div className="mt-6 text-center">
               <div className="divider text-sm text-gray-400">OR USE A DEMO ACCOUNT</div>
               <p className="text-xs text-gray-500 mb-3">See the app with pre-populated data.</p>
               <div className="flex gap-2 justify-center">
                 <button 
-                  className="btn btn-secondary btn-sm"
+                  className="btn bg-secondary text-white btn-sm hover:bg-secondary-focus"
+                  type="button"
                   onClick={() => handleDemoLogin('0xAlice123')}
                   disabled={isLoading}
                 >
                   Connect as Alice
                 </button>
                 <button 
-                  className="btn btn-accent btn-sm"
+                  className="btn bg-accent text-white btn-sm hover:bg-accent-focus"
+                  type="button"
                   onClick={() => handleDemoLogin('0xBob456')}
                   disabled={isLoading}
                 >
@@ -126,7 +127,6 @@ export default function Login({ onLogin }) {
               </div>
             </div>
           )}
-
           <div className="text-center mt-4 text-sm text-gray-500">
             <p>Requires MetaMask browser extension</p>
           </div>

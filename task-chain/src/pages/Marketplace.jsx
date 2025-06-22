@@ -103,14 +103,14 @@ export default function Marketplace() {
         {/* Your NFTs */}
         <div className="card bg-base-100 shadow-md rounded-lg">
           <div className="card-body">
-            <h3 className="card-title m-4 font-bold">Your NFTs</h3>
+            <h3 className="card-title m-4 font-bold text-2xl">Your NFTs</h3>
             {isLoading ? (
               <div className="text-center">
                 <span className="loading loading-spinner loading-md"></span>
                 <p>Loading...</p>
               </div>
             ) : userNFTs.length === 0 ? (
-              <p className="text-gray-500">No NFTs yet. Complete some goals to earn rewards!</p>
+              <p className="text-gray-500 mx-4">No NFTs yet. Complete some goals to earn rewards!</p>
             ) : (
               <div className="space-y-3">
                 {userNFTs.map((nft) => (
@@ -138,7 +138,7 @@ export default function Marketplace() {
                         </div>
                         <div className="text-right">
                           <button 
-                            className={`btn btn-xs ${nft.listed ? 'btn-success' : 'btn-outline'}`}
+                            className={`btn btn-xs ${nft.listed ? 'btn-success text-white' : 'btn-outline text-white'}`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleToggleListing(nft._id);
@@ -160,7 +160,7 @@ export default function Marketplace() {
         {/* Available for Trade */}
         <div className="card bg-base-100 shadow-md rounded-lg">
           <div className="card-body">
-            <h3 className="card-title m-4 font-bold">Available for Trade</h3>
+            <h3 className="card-title m-4 font-bold text-2xl">Available for Trade</h3>
             {isLoading ? (
               <div className="text-center">
                 <span className="loading loading-spinner loading-md"></span>
@@ -191,7 +191,7 @@ export default function Marketplace() {
                           </p>
                         </div>
                         <button 
-                          className="btn btn-primary btn-sm"
+                          className="btn btn-primary btn-sm text-white"
                           onClick={() => handleTrade(nft._id)}
                           disabled={!selectedNFT || isLoading}
                         >
