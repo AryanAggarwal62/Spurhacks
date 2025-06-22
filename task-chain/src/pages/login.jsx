@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { connectWallet } from "../services/api.js";
+import { DEMO_MODE } from "../config.js";
 
 export default function Login({ onLogin }) {
   const [walletAddress, setWalletAddress] = useState("");
@@ -64,6 +65,25 @@ export default function Login({ onLogin }) {
     }
   }
 
+  async function handleDemoLogin(demoWalletAddress) {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const userData = await connectWallet(demoWalletAddress);
+      console.log('--- DEMO LOGIN ---');
+      console.log('User data received from mock API:', userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      onLogin(userData);
+      navigate("/dashboard");
+    } catch (error) {
+      setError("Failed to connect demo user.");
+      console.error("Demo login error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-white to-pink-200 ">
       <div className="card max-w-sm w-auto bg-white shadow-2xl text-black">
@@ -83,6 +103,30 @@ export default function Login({ onLogin }) {
           >
             {isLoading ? 'Connecting...' : 'Connect with MetaMask'}
           </button>
+          
+          {DEMO_MODE && (
+            <div className="mt-6 text-center">
+              <div className="divider text-sm text-gray-400">OR USE A DEMO ACCOUNT</div>
+              <p className="text-xs text-gray-500 mb-3">See the app with pre-populated data.</p>
+              <div className="flex gap-2 justify-center">
+                <button 
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleDemoLogin('0xAlice123')}
+                  disabled={isLoading}
+                >
+                  Connect as Alice
+                </button>
+                <button 
+                  className="btn btn-accent btn-sm"
+                  onClick={() => handleDemoLogin('0xBob456')}
+                  disabled={isLoading}
+                >
+                  Connect as Bob
+                </button>
+              </div>
+            </div>
+          )}
+
           <div className="text-center mt-4 text-sm text-gray-500">
             <p>Requires MetaMask browser extension</p>
           </div>

@@ -1,0 +1,1 @@
+export const DEMO_MODE = true; // Switch to `false` to use the real backend API 
