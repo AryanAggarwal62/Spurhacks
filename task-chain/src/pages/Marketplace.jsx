@@ -8,6 +8,8 @@ export default function Marketplace() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [selectedNFT, setSelectedNFT] = useState(null);
+  const [tradeTargetNFT, setTradeTargetNFT] = useState(null);
+  const [showTradeModal, setShowTradeModal] = useState(false);
 
   // Get user data from localStorage
   const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -52,21 +54,31 @@ export default function Marketplace() {
     }
   };
 
-  const handleTrade = async (targetNftId) => {
-    if (!selectedNFT) {
-      setError("Please select one of your NFTs to trade");
-      return;
-    }
+  const handleTradeClick = (targetNftId) => {
+    setTradeTargetNFT(targetNftId);
+    setShowTradeModal(true);
+  };
 
+  const handleConfirmTrade = async (userNftId) => {
     setIsLoading(true);
     setError("");
     setSuccess("");
-
     try {
-      await executeTrade(user._id, selectedNFT._id, targetNftId);
+      const tradedNft = marketplaceNFTs.find(nft => nft._id === tradeTargetNFT);
+      const selectedUserNft = userNFTs.find(nft => nft._id === userNftId);
+      if (!tradedNft || !selectedUserNft) throw new Error("NFT not found");
+      setUserNFTs(prev => [
+        ...prev.filter(nft => nft._id !== userNftId),
+        { ...tradedNft, owner: { ...tradedNft.owner, wallet_address: user.wallet_address } }
+      ]);
+      setMarketplaceNFTs(prev => [
+        ...prev.filter(nft => nft._id !== tradeTargetNFT),
+        { ...selectedUserNft, owner: { ...selectedUserNft.owner, wallet_address: tradedNft.owner.wallet_address } }
+      ]);
       setSuccess("Trade completed successfully!");
+      setShowTradeModal(false);
+      setTradeTargetNFT(null);
       setSelectedNFT(null);
-      loadData(); // Reload data
     } catch (error) {
       setError("Failed to execute trade");
       console.error("Error executing trade:", error);
@@ -192,8 +204,8 @@ export default function Marketplace() {
                         </div>
                         <button 
                           className="btn btn-primary btn-sm text-white"
-                          onClick={() => handleTrade(nft._id)}
-                          disabled={!selectedNFT || isLoading}
+                          onClick={() => handleTradeClick(nft._id)}
+                          disabled={isLoading}
                         >
                           Trade
                         </button>
@@ -215,6 +227,35 @@ export default function Marketplace() {
           <p className="text-xs text-gray-600 mt-1">
             Click "Trade" on any available NFT to complete the exchange.
           </p>
+        </div>
+      )}
+
+      {/* Trade Modal */}
+      {showTradeModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <h3 className="text-lg font-bold mb-4 bg-white text-black">Select one of your collectibles to trade</h3>
+            <div className="grid grid-cols-1 gap-3">
+              {userNFTs.map(nft => (
+                <div key={nft._id} className="border rounded-lg p-3 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <img src={nft.image_url} alt={nft.name} className="w-10 h-10 rounded object-cover" />
+                    <span className="font-semibold text-black">{nft.name}</span>
+                  </div>
+                  <button
+                    className="btn btn-success btn-xs text-white"
+                    onClick={() => handleConfirmTrade(nft._id)}
+                    disabled={isLoading}
+                  >
+                    Trade this
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button className="btn btn-outline btn-sm mt-4 w-full" onClick={() => setShowTradeModal(false)}>
+              Cancel
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -23,9 +23,6 @@ Task Chain empowers users to stay motivated by turning goal achievement into a r
 <img width="1710" alt="Screenshot 2025-06-22 at 10 37 28 AM" src="https://github.com/user-attachments/assets/359cf57c-42d5-4e75-a098-0691e41a8066" />
 <img width="1710" alt="Screenshot 2025-06-22 at 10 37 36 AM" src="https://github.com/user-attachments/assets/c7987952-270b-4a0f-8ed3-a550971689f9" />
 
-
-
-
 **Built With**
 - **ReactJS** – Frontend framework for a seamless user experience.
 - **TailwindCSS** – Modern styling for a clean and responsive UI.
@@ -46,3 +43,4 @@ For inquiries or feedback, reach out to us:
 - Aryan Aggarwal – [LinkedIn](https://www.linkedin.com/in/aryan-aggarwal-/) 
 
 Check out our GitHub repository for more information!
+
