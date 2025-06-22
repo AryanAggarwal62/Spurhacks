@@ -33,6 +33,7 @@ Task Chain empowers users to stay motivated by turning goal achievement into a r
 **Contributors**  
 - Aryan Aggarwal - Backend 
 - Sujoy Das – Frontend
+- Aryan Dhillon - Pitch/Slideshow
 
 **Acknowledgments**  
 SpurHacks: Special thanks to SpurHacks for providing the platform and support for this project.
@@ -40,7 +41,8 @@ SpurHacks: Special thanks to SpurHacks for providing the platform and support fo
 **Contact**  
 For inquiries or feedback, reach out to us:  
 - Sujoy Das – [LinkedIn](https://www.linkedin.com/in/sujoydas1/)
-- Aryan Aggarwal – [LinkedIn](https://www.linkedin.com/in/aryan-aggarwal-/) 
+- Aryan Aggarwal – [LinkedIn](https://www.linkedin.com/in/aryan-aggarwal-/)
+- 
 
 Check out our GitHub repository for more information!
 
